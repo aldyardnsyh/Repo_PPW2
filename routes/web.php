@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MencobaController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,3 +24,13 @@ Route::get('/about', function () {
         "email" => "pragos@gmail.com"
     ]);
 });
+
+Route::get('/boom',[MencobaController::class,'boomesport']);
+
+Route::get('/prx',[MencobaController::class,'prxesport']);
+
+Route::get('/fnatic',[MencobaController::class,'fnaticsport']);
+
+Route::get('/fpx',[MencobaController::class,'fpxesport']);
+
+Route::get('/',[MencobaController::class,'beranda']);
