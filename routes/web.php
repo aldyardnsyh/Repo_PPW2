@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BukuController;
 use App\Http\Controllers\MencobaController;
 use Illuminate\Support\Facades\Route;
 
@@ -34,3 +35,5 @@ Route::get('/fnatic',[MencobaController::class,'fnaticsport']);
 Route::get('/fpx',[MencobaController::class,'fpxesport']);
 
 Route::get('/',[MencobaController::class,'beranda']);
+
+Route::get('/buku', [BukuController::class,'index']);
