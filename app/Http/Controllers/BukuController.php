@@ -9,6 +9,8 @@ class BukuController extends Controller
     public function index(){
         $data_buku = Buku::all()->sortByDesc('id');
         $no = 0;
-        return view('Buku.index', compact('data_buku', 'no'));
+        $count = Buku::count();
+        $total = Buku::sum('harga');
+        return view('Buku.index', compact('data_buku', 'no','count','total'));
     }
 }
