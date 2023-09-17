@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <div class="container">
+    <div class="container" style="margin-top: 20px;">
         <h1 class="text-center">Daftar Buku</h1>
         <div class="table-responsive mx-auto">
             <table class="table table-striped">
@@ -48,8 +48,8 @@
         </div>
         
         <!-- Jumlah semua buku dan total harga semua buku -->
-        <div class="row">
-            <div class="col-md-6">
+        <div class="row" style="margin-bottom: 20px;">
+            <div class="col-md-3">
                 <strong>Jumlah Semua Buku: {{ $count }}</strong>
             </div>
             <div class="col-md-6">
