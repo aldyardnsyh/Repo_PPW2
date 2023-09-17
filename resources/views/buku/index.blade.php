@@ -29,7 +29,7 @@
                             <td>{{ $buku->judul }}</td>
                             <td>{{ $buku->penulis }}</td>
                             <td>{{ "Rp ".number_format($buku->harga, 2, ',', '.' )}}</td>
-                            <td>{{ $buku->tgl_terbit }}</td>
+                            <td>{{ date('d F Y', strtotime($buku->tgl_terbit)) }}</td>
                             <td>
                                 <a href="#" class="btn btn-info">
                                     <i class="fas fa-eye"></i> View
