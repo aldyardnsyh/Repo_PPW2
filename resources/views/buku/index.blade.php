@@ -31,8 +31,8 @@
                             <td>{{ "Rp ".number_format($buku->harga, 2, ',', '.' )}}</td>
                             <td>{{ date('d F Y', strtotime($buku->tgl_terbit)) }}</td>
                             <td>
-                                <a href="#" class="btn btn-info">
-                                    <i class="fas fa-eye"></i> View
+                                <a href="{{ route('buku.create') }}" class="btn btn-info">
+                                    <i class="fas fa-add"></i> Tambah Buku
                                 </a>
                                 <a href="#" class="btn btn-warning">
                                     <i class="fas fa-edit"></i> Edit
