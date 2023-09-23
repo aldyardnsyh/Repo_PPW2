@@ -26,4 +26,10 @@ class BukuController extends Controller
             $buku->save();
             return redirect('/buku');
     }
+    
+    public function destroy($id){
+        $buku = Buku::find($id);
+        $buku->delete();
+        return redirect('/buku');
+    }
 }
