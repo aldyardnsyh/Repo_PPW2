@@ -40,3 +40,4 @@ Route::get('/',[MencobaController::class,'beranda']);
 Route::get('/buku', [BukuController::class,'index']);
 Route::get('/buku/create', [BukuController::class, 'create'])->name('buku.create');
 Route::get('/buku/store', [BukuController::class, 'store'])->name('buku.store');
+Route::get('/buku/delete/{id}', [BukuController::class, 'destroy'])->name('buku.destroy');
