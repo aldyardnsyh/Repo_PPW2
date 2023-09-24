@@ -10,6 +10,12 @@
 <body>
     <div class="container" style="margin-top: 20px;">
         <h1 class="text-center">Daftar Buku</h1>
+        
+        <!-- Tombol "Tambah Buku" di pojok kanan atas -->
+        <a href="{{ route('buku.create') }}" class="btn btn-info float-right mb-3">
+            <i class="fas fa-add"></i> Tambah Buku
+        </a>
+        
         <div class="table-responsive mx-auto">
             <table class="table table-striped">
                 <thead>
@@ -30,15 +36,17 @@
                             <td>{{ $buku->penulis }}</td>
                             <td>{{ "Rp ".number_format($buku->harga, 2, ',', '.' )}}</td>
                             <td>{{ date('d F Y', strtotime($buku->tgl_terbit)) }}</td>
-                            <td>
-                                <a href="{{ route('buku.create') }}" class="btn btn-info">
-                                    <i class="fas fa-add"></i> Tambah Buku
-                                </a>
+                            <td class="col-md-4">
                                 <a href="#" class="btn btn-warning">
                                     <i class="fas fa-edit"></i> Edit
                                 </a>
-                                <a href="#" class="btn btn-danger">
-                                    <i class="fas fa-trash-alt"></i> Delete
+                                <a href="" >
+                                    @csrf 
+                                    <button class="btn btn-primary"><i class="fas fa-sync-alt"></i> Update</button>
+                                </a>
+                                <a href="{{ route('buku.destroy', $buku->id) }}" method="post">
+                                    @csrf 
+                                    <button class="btn btn-danger" onclick="return confirm('yakin mau dihapus?')"><i class="fas fa-trash-alt"></i> Hapus</button>
                                 </a>
                             </td>
                         </tr>
