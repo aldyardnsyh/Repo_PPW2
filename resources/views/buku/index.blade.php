@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <div class="container" style="margin-top: 20px;">
+    <div class="container mt-4">
         <h1 class="text-center">Daftar Buku</h1>
         
         <!-- Tombol "Tambah Buku" di pojok kanan atas -->
@@ -36,18 +36,17 @@
                             <td>{{ $buku->penulis }}</td>
                             <td>{{ "Rp ".number_format($buku->harga, 2, ',', '.' )}}</td>
                             <td>{{ date('d F Y', strtotime($buku->tgl_terbit)) }}</td>
-                            <td class="col-md-4">
-                                <a href="#" class="btn btn-warning">
-                                    <i class="fas fa-edit"></i> Edit
-                                </a>
-                                <a href="" >
-                                    @csrf 
-                                    <button class="btn btn-primary"><i class="fas fa-sync-alt"></i> Update</button>
-                                </a>
-                                <a href="{{ route('buku.destroy', $buku->id) }}" method="post">
-                                    @csrf 
-                                    <button class="btn btn-danger" onclick="return confirm('yakin mau dihapus?')"><i class="fas fa-trash-alt"></i> Hapus</button>
-                                </a>
+                            <td>
+                                <form action="{{ route('buku.destroy', $buku->id) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <a href="{{ route('buku.edit', $buku->id) }}" class="btn btn-warning">
+                                        <i class="fas fa-edit"></i> Edit
+                                    </a>
+                                    <button type="submit" class="btn btn-danger" onclick="return confirm('Yakin mau dihapus?')">
+                                        <i class="fas fa-trash-alt"></i> Hapus
+                                    </button>
+                                </form>
                             </td>
                         </tr>
                     @endforeach
@@ -65,6 +64,7 @@
             </div>
         </div>
     </div>
+    
     <!-- Tambahkan link ke Bootstrap JS dan jQuery jika Anda menggunakan Bootstrap -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
