@@ -25,7 +25,7 @@ class MencobaController extends Controller
     }
     public function beranda()
     {
-        return view('layout/home');
+        return view('welcome');
     }
 
 }
