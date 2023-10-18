@@ -9,4 +9,5 @@ class Buku extends Model
 {
     use HasFactory;
     protected $table = 'buku';
+    protected $dates = ['tgl_terbit'];
 }
