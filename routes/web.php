@@ -46,3 +46,5 @@ Route::delete('/buku/{id}', [BukuController::class, 'destroy'])->name('buku.dest
 Route::get('/buku/edit/{id}', [BukuController::class, 'edit'])->name('buku.edit');
 // Buku Update
 Route::post('/buku/update/{id}', [BukuController::class, 'update'])->name('buku.update');
+// Fitur Search
+Route::get('/buku/search', [BukuController::class, 'search'])->name('buku.search');
