@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,16 +14,35 @@
             color: #fff;
             text-align: center;
         }
+
+        /* Gaya untuk alert error */
+        .alert-danger {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 99;
+        }
     </style>
 </head>
+
 <body>
+    <!-- Alert di kanan atas -->
+    @if (count($errors) > 0)
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
     <div class="container mt-4">
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <div class="card">
                     <!-- Header dengan warna -->
                     <div class="card-header">
-                        <h4>Tambah Buku</i></h4>
+                        <h4>Tambah Buku</h4>
                     </div>
                     <div class="card-body">
                         <form action="{{ route('buku.store') }}" method="POST">
@@ -55,8 +75,15 @@
     </div>
 
     <!-- Tambahkan link ke Bootstrap JS dan jQuery jika Anda menggunakan Bootstrap -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        // Menghilangkan alert setelah 3 detik
+        setTimeout(function() {
+            document.querySelector('.alert.alert-danger').style.display = 'none';
+        }, 3000);
+    </script>
 </body>
+
 </html>
