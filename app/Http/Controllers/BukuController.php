@@ -9,7 +9,7 @@ class BukuController extends Controller
 {
     public function index(){
         $batas = 5;
-        $data_buku = Buku::orderBy('id', 'desc')->simplePaginate($batas);
+        $data_buku = Buku::orderBy('id', 'desc')->paginate($batas);
         $no = $batas * ($data_buku->currentPage() -1);
         $jumlah_buku = Buku::count();
         $total = Buku::sum('harga');
