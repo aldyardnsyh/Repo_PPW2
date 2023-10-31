@@ -1,10 +1,16 @@
-<!DOCTYPE html>
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight text-center">
+            {{ __('Daftar Buku') }}
+        </h2>
+    </x-slot>
+
+    <!DOCTYPE html>
 <html lang="id">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daftar Buku</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
@@ -50,8 +56,6 @@
             {{ session('hapus') }}
         </div>
         @endif
-        <h1 class="text-center">Daftar Buku</h1>
-
         <!-- Tombol "Tambah Buku" di pojok kanan atas -->
         <a href="{{ route('buku.create') }}" class="btn btn-info float-right mb-3">
             <i class="fas fa-add"></i> Tambah Buku
@@ -107,7 +111,6 @@
             </div>
         </div>
         <div>{{$data_buku->links('vendor.pagination.bootstrap-5')}}</div>
-
     </div>
 
     <!-- Tambahkan link ke Bootstrap JS dan jQuery jika Anda menggunakan Bootstrap -->
@@ -117,3 +120,4 @@
 </body>
 
 </html>
+</x-app-layout>
