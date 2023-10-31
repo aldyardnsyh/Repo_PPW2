@@ -55,15 +55,15 @@ class BukuController extends Controller
     
         return redirect('/buku')->with('success', 'Data berhasil diubah');
     }
-
+    
     public function search(Request $request){
         $batas = 5;
         $cari = $request->kata;
         $data_buku = Buku::where('judul', 'like', "%".$cari."%")->orwhere('penulis','like',"%".$cari."%")
-        ->simplePaginate($batas);
+        ->paginate($batas);
         $jumlah_buku = $data_buku->count();
         $no = $batas * ($data_buku->currentPage() -1);
         $total = Buku::sum('harga');
         return view('Buku.search', compact('data_buku', 'no','jumlah_buku','total','cari'));
-    }
+    }   
 }
