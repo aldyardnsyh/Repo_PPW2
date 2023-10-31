@@ -132,6 +132,16 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+        'judul.required' => 'Kolom judul wajib diisi.',
+        'judul.string' => 'Kolom judul harus berisi teks.',
+        'penulis.required' => 'Kolom penulis wajib diisi.',
+        'penulis.string' => 'Kolom penulis harus berisi teks.',
+        'penulis.max' => 'Kolom penulis maksimal 30 karakter.',
+        'harga.required' => 'Kolom harga wajib diisi.',
+        'harga.numeric' => 'Kolom harga harus berisi angka.',
+        'tgl_terbit.required' => 'Kolom tanggal terbit wajib diisi.',
+        'tgl_terbit.date' => 'Kolom tanggal terbit harus berisi tanggal yang valid.',
+        'kata.required' => 'Kotak search harus diisi'
     ],
 
     /*
