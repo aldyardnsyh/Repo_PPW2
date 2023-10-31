@@ -106,7 +106,7 @@
                 <strong>Total Harga Semua Buku: {{ "Rp ".number_format($total, 2, ',', '.' )}}</strong>
             </div>
         </div>
-        <div>{{$data_buku->links()}}</div>
+        <div>{{$data_buku->links('vendor.pagination.bootstrap-5')}}</div>
 
     </div>
 
