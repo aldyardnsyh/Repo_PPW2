@@ -100,18 +100,6 @@
                                         <i class="fas fa-trash-alt"></i> Hapus
                                     </button>
                                 </form>
-                            <td>
-                                <form action="{{ route('buku.destroy', $buku->id) }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <a href="{{ route('buku.edit', $buku->id) }}" class="btn btn-warning">
-                                        <i class="fas fa-edit"></i> Edit
-                                    </a>
-                                    <button type="submit" class="btn btn-danger" onclick="return confirm('Yakin mau dihapus?')">
-                                        <i class="fas fa-trash-alt"></i> Hapus
-                                    </button>
-                                </form>
-                            </td>
                             @endif
                         </tr>
                         @endforeach
