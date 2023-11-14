@@ -68,7 +68,7 @@
             </form>
             <div class="table-responsive mx-auto">
                 <table class="table table-striped">
-                    <thead>
+                    <!-- <thead>
                         <tr>
                             <th>No</th>
                             <th>Judul Buku</th>
@@ -79,12 +79,37 @@
                             <th>Aksi</th>
                             @endif
                         </tr>
+                    </thead> -->
+                    <thead>
+                        <tr>
+                            <th scope="col" style="width: 50px;">No.</th>
+                            <th scope="col">Judul Buku</th>
+                            <th scope="col">Penulis</th>
+                            <th scope="col">Harga</th>
+                            <th scope="col">Tgl. Terbit</th>
+                            @if(Auth::user()->level == 'admin')
+                                <th scope="col">Aksi</th>
+                            @endif
+                        </tr>
                     </thead>
                     <tbody>
                         @foreach($data_buku as $buku)
                         <tr>
                             <td>{{ ++$no }}</td>
-                            <td>{{ $buku->judul }}</td>
+                            <td>
+                                <div class="flex items-center">
+                                    @if ($buku->filepath)
+                                        <div class="relative h-7 w-7">
+                                            <img
+                                                class="h-full w-full rounded-full object-cover object-center"
+                                                src="{{ asset($buku->filepath) }}"
+                                                alt="thumbnail"
+                                            />
+                                        </div>
+                                    @endif
+                                    <span class="ml-2">{{ $buku->judul }}</span>
+                                </div>
+                            </td>
                             <td>{{ $buku->penulis }}</td>
                             <td>{{ "Rp ".number_format($buku->harga, 0  , ',', '.' )}}</td>
                             <td>{{ date('d M Y', strtotime($buku->tgl_terbit)) }}</td>
