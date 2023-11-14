@@ -30,6 +30,7 @@ class BukuController extends Controller
             'penulis' => 'required|string|max:30',
             'harga' => 'required|numeric',
             'tgl_terbit' => 'required|date',
+            'thumbnail' => 'image|mimes:jpeg,jpg,png,webp|max:2048',
         ]);
         $buku = new Buku;
         $buku->judul = $request->judul;
@@ -37,6 +38,34 @@ class BukuController extends Controller
         $buku->harga = $request->harga;
         $buku->tgl_terbit = $request->tgl_terbit;
         $buku->save();
+
+        if ($request->file('thumbnail')) {
+            $thumbnailFileName = time() . '-' . $request->thumbnail->getClientOriginalName();
+            $thumbnailFilePath = $request->file('thumbnail')->storeAs('uploads', $thumbnailFileName, 'public');
+
+            Image::make(storage_path() . '/app/public/uploads/' . $thumbnailFileName)
+                ->fit(240, 320)
+                ->save();
+
+            $buku->filename = $thumbnailFileName;
+            $buku->filepath = '/storage/' . $thumbnailFilePath;
+            $buku->save();
+        }
+
+        if ($request->file('gallery')) {
+            foreach ($request->file('gallery') as $file) {
+                $galleryFileName = time() . '_' . $file->getClientOriginalName();
+                $galleryFilePath = $file->storeAs('uploads', $galleryFileName, 'public');
+
+                $gallery = new Gallery;
+                $gallery->nama_galeri = $galleryFileName;
+                $gallery->path = '/storage/' . $galleryFilePath;
+                $gallery->foto = $galleryFileName;
+                $gallery->buku_id = $buku->id;
+                $gallery->save();
+            }
+        }
+
         return redirect('/buku')->with('pesan', 'Data Buku Berhasil di Simpan');
     }
 
@@ -113,5 +142,16 @@ class BukuController extends Controller
         $no = $batas * ($data_buku->currentPage() - 1);
         $total = Buku::sum('harga');
         return view('Buku.search', compact('data_buku', 'no', 'jumlah_buku', 'total', 'cari'));
+    }
+    public function destroyImage($buku_id, $image_id) {
+        $buku = Buku::find($buku_id);
+        $image = Gallery::find($image_id);
+
+        if ($image && $buku && $image->buku_id === $buku->id) {
+            $image->delete();
+            return back()->with('pesan', 'Image deleted successfully');
+        } else {
+            return back()->with('error', 'Image not found or does not belong to the book');
+        }
     }
 }
