@@ -20,6 +20,7 @@
                 color: #fff;
                 text-align: center;
             }
+
         </style>
     </head>
 
@@ -69,19 +70,24 @@
                                         };
                                     </script>
                                 </div>
-                                <div class="gallery_items">
-                                    @foreach($buku->galleries()->get() as $gallery)
-                                    <div class="gallery_item">
-                                        <img class="rounded-full object-cover object-center" src="{{ asset($gallery->path) }}" alt="" width="400" />
-                                    </div>
-                                    @endforeach
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-primary"><i class="fas fa-sync-alt"></i> Update</button>
+                                    <a href="/buku" class="btn btn-secondary ml-2">Batal</a>
                                 </div>
                         </div>
-                        <div class="text-center">
-                            <button type="submit" class="btn btn-primary"><i class="fas fa-sync-alt"></i> Update</button>
-                            <a href="/buku" class="btn btn-secondary ml-2">Batal</a>
-                        </div>
                         </form>
+                        <!-- Gallery -->
+                        <div class="gallery_items">
+                            @foreach($buku->galleries()->get() as $gallery)
+                            <div class="gallery_item">
+                                <img class="rounded-full object-cover object-center" src="{{ asset($gallery->path) }}" alt="" width="400" />
+                                <form action="{{ route('buku.destroyImage', [$buku->id, $gallery->id]) }}" method="POST">
+                                    @csrf
+                                    <button class="btn btn-danger mt-1 mb-1" onClick="return confirm('Yakin ingin dihapus?')">Hapus</button>
+                                </form>
+                            </div>
+                            @endforeach
+                        </div>
                     </div>
                 </div>
             </div>
