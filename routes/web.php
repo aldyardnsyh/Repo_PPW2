@@ -60,6 +60,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/buku/edit/{id}', [BukuController::class, 'edit'])->name('buku.edit');
     // Update Buku
     Route::post('/buku/update/{id}', [BukuController::class, 'update'])->name('buku.update');
+    // Delete Image
+    Route::post('/buku/edit/{id}/delete-image/{image_id}', [BukuController::class, 'destroyImage'])->name('buku.destroyImage');
     });
     // Cari Buku
     Route::get('/buku/search', [BukuController::class, 'search'])->name('buku.search');
