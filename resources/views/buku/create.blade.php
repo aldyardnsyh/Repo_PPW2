@@ -70,13 +70,13 @@
                                 </div>
                                 <!-- Thumbnail -->
                                 <div class="mb-4">
-                                    <label class="block text-gray-700 text-sm font-bold mb-2" for="thumbnail">Thumbnail</label>
+                                    <label class="block text-gray-700 text-lg font-bold mb-2" for="thumbnail">Thumbnail</label>
                                     <input type="file" class="form-control" name="thumbnail" id="thumbnail">
                                 </div>
 
                                 <!-- Gallery -->
                                 <div class="col-span-full mt-6">
-                                    <label class="block text-gray-700 text-sm font-bold mb-2" for="gallery">Gallery</label>
+                                    <label class="block text-gray-700 text-lg font-bold mb-2" for="gallery">Gallery</label>
                                     <div class="mt-2 mb-3" id="fileinput_wrapper">
                                         <a href="javascript:void(0);" id="tambah" class="btn btn-success mb-4" onclick="addFileInput()">+ Tambah</a>
                                         <script type="text/javascript">
