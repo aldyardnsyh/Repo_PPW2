@@ -20,7 +20,6 @@
                 color: #fff;
                 text-align: center;
             }
-
         </style>
     </head>
 
@@ -58,15 +57,14 @@
                                     <input type="file" class="form-control" id="thumbnail" name="thumbnail">
                                 </div>
                                 <div class="col-span-full mt-6">
-                                    <label for="gallery" class="block text-sm font-medium leading-6 text-gray-900">Gallery</label>
+                                    <label for="gallery" class="block text-lg">Gallery</label>
                                     <div class="mt-2" id="fileinput_wrapper">
-
                                     </div>
                                     <a href="javascript:void(0);" id="tambah" onclick="addFileInput()">Tambah</a>
                                     <script type="text/javascript">
                                         function addFileInput() {
                                             var div = document.getElementById('fileinput_wrapper');
-                                            div.innerHTML += '<input type="file" name="gallery[]" id="gallery" class="block w-full mb-5" style="margin-bottom:5px;">';
+                                            div.innerHTML += '<input type="file" name="gallery[]" id="gallery" class="form-control mb-3">';
                                         };
                                     </script>
                                 </div>
@@ -77,17 +75,20 @@
                         </div>
                         </form>
                         <!-- Gallery -->
-                        <div class="gallery_items">
+                        <div class="gallery_items mt-6 space-x-4 flex flex-wrap ">
                             @foreach($buku->galleries()->get() as $gallery)
-                            <div class="gallery_item">
-                                <img class="rounded-full object-cover object-center" src="{{ asset($gallery->path) }}" alt="" width="400" />
-                                <form action="{{ route('buku.destroyImage', [$buku->id, $gallery->id]) }}" method="POST">
+                            <div class="gallery_item relative mb-4 ml-3">
+                                <img class="object-cover object-center" src="{{ asset($gallery->path) }}" alt="" width="200" />
+                                <form action="{{ route('buku.destroyImage', [$buku->id, $gallery->id]) }}" method="POST" class="absolute top-0 right-0 p-2">
                                     @csrf
-                                    <button class="btn btn-danger mt-1 mb-1" onClick="return confirm('Yakin ingin dihapus?')">Hapus</button>
+                                    <button class="btn btn-danger" onClick="return confirm('Yakin ingin dihapus?')">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
                                 </form>
                             </div>
                             @endforeach
                         </div>
+
                     </div>
                 </div>
             </div>
