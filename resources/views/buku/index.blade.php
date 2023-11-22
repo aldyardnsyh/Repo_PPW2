@@ -100,14 +100,10 @@
                                 <div class="flex items-center">
                                     @if ($buku->filepath)
                                         <div class="relative h-7 w-7">
-                                            <img
-                                                class="h-full w-full rounded-full object-cover object-center"
-                                                src="{{ asset($buku->filepath) }}"
-                                                alt="thumbnail"
-                                            />
+                                        <img class="h-full w-full object-cover object-center" src="{{ asset($buku->filepath) }}" alt="" />
                                         </div>
                                     @endif
-                                    <span class="ml-2">{{ $buku->judul }}</span>
+                                    <span class="ml-2"><a href="{{ route('buku.galeri', $buku->id) }}">{{ $buku->judul }}</a></span>
                                 </div>
                             </td>
                             <td>{{ $buku->penulis }}</td>
