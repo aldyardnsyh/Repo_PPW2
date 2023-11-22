@@ -4,7 +4,6 @@
             {{ __('Galeri Buku') }}
         </h2>
     </x-slot>
-
     <section id="album" class="py-5 bg-light">
         <div class="container">
             <h1 class="h1 text-center">{{ $bukus->judul }}</h1>
@@ -32,6 +31,4 @@
             {{ $galeris->links() }}
         </div>
     </section>
-
-
 </x-app-layout>
