@@ -154,4 +154,9 @@ class BukuController extends Controller
             return back()->with('error', 'Image not found or does not belong to the book');
         }
     }
+    public function galbuku($id) {
+        $bukus = Buku::find($id);
+        $galeris = $bukus->galleries()->paginate(6);
+        return view('buku.galeri', compact('bukus', 'galeris'));
+    }
 }
