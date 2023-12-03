@@ -13,6 +13,6 @@ class Gallery extends Model
 
     public function buku(): BelongsTo
     {
-        return $this->belongsTo(Buku::class);
+        return $this->belongsTo(Buku::class, 'buku_id', 'id');
     }
 }
