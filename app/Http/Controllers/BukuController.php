@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Buku;
 use Illuminate\Http\Request;
 use App\Models\Gallery;
+use App\Models\BukuRating;
 use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Auth;
+
 
 
 class BukuController extends Controller
@@ -159,4 +162,37 @@ class BukuController extends Controller
         $galeris = $bukus->galleries()->paginate(6);
         return view('buku.galeri', compact('bukus', 'galeris'));
     }
+
+    public function details($id) {
+        $buku = Buku::find($id);
+        return view('buku.detail', compact('buku'));
+    }
+
+    // Metode untuk submit rating buku
+    public function submitRating(Request $request, $id)
+{
+    $buku = Buku::find($id);
+
+    if ($buku) {
+        // Cek apakah pengguna sudah memberikan rating sebelumnya
+        $userRating = $buku->ratings()->where('user_id', Auth::id())->first();
+
+        if ($userRating) {
+            // Jika sudah ada, update rating yang sudah ada
+            $userRating->update(['rating' => $request->rating]);
+            $message = 'Terima kasih telah mengubah rating';
+        } else {
+            // Jika belum ada, buat rating baru
+            $buku->ratings()->create([
+                'user_id' => Auth::id(),
+                'rating' => $request->rating,
+            ]);
+            $message = 'Terima kasih telah memberikan rating';
+        }
+
+        return redirect()->back()->with('pesan', $message);
+    } else {
+        return back()->with('error', 'Buku tidak ditemukan');
+    }
+}
 }

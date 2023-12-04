@@ -22,4 +22,25 @@ class Buku extends Model
     public function photos() {
         return $this->hasMany(Buku::class, 'buku_id', 'id');
     }
+
+    public function ratings()
+    {
+        return $this->hasMany(BukuRating::class);
+    }
+
+    public function calculateAverageRating()
+{
+    $ratings = $this->ratings()->pluck('rating')->toArray();
+
+    $a = array_count_values($ratings)[1] ?? 0;
+    $b = array_count_values($ratings)[2] ?? 0;
+    $c = array_count_values($ratings)[3] ?? 0;
+    $d = array_count_values($ratings)[4] ?? 0;
+    $e = array_count_values($ratings)[5] ?? 0;
+
+    $totalRating = $a + 2 * $b + 3 * $c + 4 * $d + 5 * $e;
+    $totalUsers = count($ratings);
+
+    return $totalUsers > 0 ? $totalRating / $totalUsers : 0;
+}
 }

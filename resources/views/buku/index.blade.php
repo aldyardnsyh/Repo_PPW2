@@ -83,12 +83,16 @@
                     <thead>
                         <tr>
                             <th scope="col" style="width: 50px;">No.</th>
+                            <!-- Tambahkan kolom untuk menampilkan rating hanya untuk user -->
+                            @if(Auth::check() && Auth::user()->level == 'user')
+                            <th scope="col">Rating</th>
+                            @endif
                             <th scope="col">Judul Buku</th>
                             <th scope="col">Penulis</th>
                             <th scope="col">Harga</th>
                             <th scope="col">Tgl. Terbit</th>
                             @if(Auth::user()->level == 'admin')
-                                <th scope="col">Aksi</th>
+                            <th scope="col">Aksi</th>
                             @endif
                         </tr>
                     </thead>
@@ -96,18 +100,26 @@
                         @foreach($data_buku as $buku)
                         <tr>
                             <td>{{ ++$no }}</td>
+                            <!-- Tampilkan rata-rata rating -->
+                            <td>
+                                @if($buku->ratings->count() > 0)
+                                {{ number_format($buku->calculateAverageRating(), 1) ?: 'Belum Ada Rating' }}
+                                @else
+                                <span style="color: red;">No Ratings</span>
+                                @endif
+                            </td>
                             <td>
                                 <div class="flex items-center">
                                     @if ($buku->filepath)
-                                        <div class="relative h-7 w-7">
+                                    <div class="relative h-7 w-7">
                                         <img class="h-full w-full object-cover object-center" src="{{ asset($buku->filepath) }}" alt="" />
-                                        </div>
+                                    </div>
                                     @endif
-                                    <span class="ml-2"><a href="{{ route('buku.galeri', $buku->id) }}">{{ $buku->judul }}</a></span>
+                                    <span class="ml-2"><a href="{{ route('buku.detail', $buku->id) }}">{{ $buku->judul }}</a></span>
                                 </div>
                             </td>
                             <td>{{ $buku->penulis }}</td>
-                            <td>{{ "Rp ".number_format($buku->harga, 0  , ',', '.' )}}</td>
+                            <td>{{ "Rp ".number_format($buku->harga, 0, ',', '.' )}}</td>
                             <td>{{ date('d M Y', strtotime($buku->tgl_terbit)) }}</td>
                             @if(Auth::check() && Auth::user()->level == 'admin')
                             <td>
@@ -121,13 +133,16 @@
                                         <i class="fas fa-trash-alt"></i> Hapus
                                     </button>
                                 </form>
+                            </td>
                             @endif
                         </tr>
                         @endforeach
                     </tbody>
                 </table>
             </div>
+
             <!-- Jumlah semua buku dan total harga semua buku -->
+            @if(Auth::check() && Auth::user()->level == 'admin')
             <div class="row" style="margin-bottom: 20px;">
                 <div class="col-md-3">
                     <strong>Jumlah Semua Buku: {{ $jumlah_buku }}</strong>
@@ -136,6 +151,7 @@
                     <strong>Total Harga Semua Buku: {{ "Rp ".number_format($total, 2, ',', '.' )}}</strong>
                 </div>
             </div>
+            @endif
             <div>{{$data_buku->links('vendor.pagination.bootstrap-5')}}</div>
         </div>
 
