@@ -18,6 +18,10 @@
                     <x-nav-link :href="route('buku.index')" :active="request()->routeIs('buku.index')">
                         {{ __('Buku') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('buku.favourite')" :active="request()->routeIs('buku.favourite')">
+                        {{ __('Buku Favorit') }}
+                    </x-nav-link>
+
                 </div>
             </div>
 
@@ -45,8 +49,7 @@
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
 
-                            <x-dropdown-link :href="route('logout')"
-                                    onclick="event.preventDefault();
+                            <x-dropdown-link :href="route('logout')" onclick="event.preventDefault();
                                                 this.closest('form').submit();">
                                 {{ __('Log Out') }}
                             </x-dropdown-link>
@@ -91,8 +94,7 @@
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
 
-                    <x-responsive-nav-link :href="route('logout')"
-                            onclick="event.preventDefault();
+                    <x-responsive-nav-link :href="route('logout')" onclick="event.preventDefault();
                                         this.closest('form').submit();">
                         {{ __('Log Out') }}
                     </x-responsive-nav-link>

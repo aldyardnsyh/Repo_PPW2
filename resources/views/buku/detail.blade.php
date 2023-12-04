@@ -52,9 +52,14 @@
             <div class="my-3">
                 <a href="{{ url('/buku') }}" class="btn btn-secondary">Kembali</a>
             </div>
-            <h1 class="h1 text-center">{{ $buku->judul }}</h1>
-            <hr class="my-4">
+            @if ($buku)
+            <h1>{{ $buku->judul }}</h1>
+            <!-- Tampilkan informasi buku lainnya -->
+            @else
+            <p>Buku tidak ditemukan.</p>
+            @endif
 
+            @if($buku)
             <!-- Gallery Section -->
             <div class="row justify-content-around mt-4">
                 @if(count($buku->galleries) > 0)
@@ -71,7 +76,9 @@
                 @endif
                 <hr class="my-5">
             </div>
+            @endif
 
+            @if($buku)
             <!-- Informasi Buku -->
             <div>
                 <p class="book-info">Informasi Buku: </p>
@@ -83,7 +90,10 @@
                 <p class="book-info-p">Rating Rata-Rata: {{ number_format($buku->calculateAverageRating(), 1) ?: 'Belum Ada Rating' }}</p>
                 <p class="book-info-p">Total Rating: {{ $buku->ratings->count() }}</p>
             </div>
+            @endif
 
+            
+            @if($buku)
             <!-- Rating Form Section - Show only for regular users -->
             @if(Auth::check() && Auth::user()->level == 'user')
             <div class="mt-4">
@@ -100,7 +110,14 @@
                     </div>
                     <button type="submit" class="btn btn-primary mt-4 submit-btn">Submit Rating</button>
                 </form>
+                @if(Auth::check() && Auth::user()->level == 'user')
+                <form action="{{ route('buku.addToFavourite', $buku->id) }}" method="post">
+                    @csrf
+                    <button type="submit" class="btn btn-primary mt-4">Simpan ke Daftar Favorit</button>
+                </form>
+                @endif
             </div>
+            @endif
             @endif
 
 

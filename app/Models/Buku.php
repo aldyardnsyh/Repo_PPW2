@@ -43,4 +43,10 @@ class Buku extends Model
 
     return $totalUsers > 0 ? $totalRating / $totalUsers : 0;
 }
+
+public function favourites()
+    {
+        return $this->hasMany(Favourite::class, 'buku_id');
+    }
+
 }

@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Buku;
 use Illuminate\Http\Request;
 use App\Models\Gallery;
+use App\Models\User;
 use App\Models\BukuRating;
+
+use App\Models\Favourite;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Auth;
 
@@ -195,4 +198,38 @@ class BukuController extends Controller
         return back()->with('error', 'Buku tidak ditemukan');
     }
 }
+
+public function myFavouriteBooks()
+{
+    // Assuming the user is logged in
+    $favouriteBooks = Favourite::where('user_id', Auth::id())->get();
+
+    return view('buku.favourite', compact('favouriteBooks'));
+}
+
+
+// Method for adding a favourite book
+public function addToFavourite($id)
+{
+    $buku = Buku::find($id);
+
+    if ($buku) {
+        // Check if the book is already in favourites
+        $favouriteBook = Favourite::where('user_id', Auth::id())->where('buku_id', $buku->id)->first();
+
+        if ($favouriteBook) {
+            return back()->with('error', 'Buku sudah ada di daftar favorit');
+        } else {
+            // Add the book to favourites
+            Favourite::create([
+                'user_id' => Auth::id(),
+                'buku_id' => $buku->id,
+            ]);
+
+            return back()->with('pesan', 'Buku berhasil ditambahkan ke daftar favorit');
+        }
+    } else {
+        return back()->with('error', 'Buku tidak ditemukan');
+    }
+    }
 }
